@@ -1,4 +1,4 @@
-namespace MechanicShop.Domain.Common
+namespace MechanicShop.Domain.Common.Constants
 {
     public static class MechanicShopConstant
     {
