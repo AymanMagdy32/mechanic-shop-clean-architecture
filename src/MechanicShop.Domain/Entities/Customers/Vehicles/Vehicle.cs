@@ -6,42 +6,57 @@ namespace MechanicShop.Domain.Entities.Customers.Vehicles
 {
 public sealed class Vehicle : AuditableEntity
 {
-    public Guid CustomerId { get; private set; }
-    public string LicensePlate { get; private set; } = string.Empty; 
-    public string Make { get; private set; } = string.Empty; 
-    public string Model { get; private set; } = string.Empty;
+    public Guid CustomerId { get; }
+    public string Make { get; private set; }
+    public string Model { get; private set; }
     public int Year { get; private set; }
+    public string LicensePlate { get; private set; }
+    public Customer? Customer { get; set; }
 
-     public string VechicleInfo => $"{Make} | {Model} | {Year}"; 
+    public string VehicleInfo => $"{Make} | {Model} | {Year}";
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
-    private Vehicle()    {} 
+    private Vehicle()
+    { }
 
-    private Vehicle(Guid id, Guid customerId, string licensePlate, string make, string model, int year) : base(id)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+
+    private Vehicle(Guid id, string make, string model, int year, string licensePlate)
+        : base(id)
     {
-        CustomerId = customerId;
-        LicensePlate = licensePlate;
         Make = make;
         Model = model;
         Year = year;
+        LicensePlate = licensePlate;
     }
-  public static Result<Vehicle> Create(Guid id, Guid customerId, string licensePlate, string make, string model, int year)
+
+    public static Result<Vehicle> Create(Guid id, string make, string model, int year, string licensePlate)
     {
-        if (string.IsNullOrWhiteSpace(licensePlate))
-            return VehicleErrors.LicensePlateRequired;
         if (string.IsNullOrWhiteSpace(make))
+        {
             return VehicleErrors.MakeRequired;
+        }
+
         if (string.IsNullOrWhiteSpace(model))
+        {
             return VehicleErrors.ModelRequired;
-        if (year <= 0)
+        }
+
+        if (string.IsNullOrWhiteSpace(licensePlate))
+        {
+            return VehicleErrors.LicensePlateRequired;
+        }
+
+        if (year < 1886 || year > DateTime.UtcNow.Year)
+        {
             return VehicleErrors.InvalidYear;
+        }
 
-        return new Vehicle(id, customerId, licensePlate, make, model, year);
+        return new Vehicle(id, make, model, year, licensePlate);
+    }
 
-
-
-}
-  public Result<Updated> Update(string make, string model, int year, string licensePlate)
+    public Result<Updated> Update(string make, string model, int year, string licensePlate)
     {
         if (string.IsNullOrWhiteSpace(make))
         {
