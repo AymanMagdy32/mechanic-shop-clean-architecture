@@ -1,34 +1,21 @@
-
 using MechanicShop.Domain.Common.Results;
 
-namespace MechanicShop.Application.Common.ApplicationErrors
-{
-    public static class ApplicationErrors
+namespace MechanicShop.Application.Common.Errors;
+
+public static class ApplicationErrors
 {
     public static Error WorkOrderOutsideOperatingHour(DateTimeOffset startAtUtc, DateTimeOffset endAtUtc) =>
     Error.Conflict(
            "ApplicationErrors.WorkOrder.Outside.OperatingHours",
            $"The WorkOrder time ({startAtUtc} ? {endAtUtc}) is outside of store operating hours.");
 
-
-   public static Error InvoiceAlreadyExistsForWorkOrder(Guid workOrderId) =>
-    Error.Conflict(
-           "ApplicationErrors.WorkOrder.InvoiceAlreadyExists",
-           $"An invoice already exists for WorkOrder with ID: {workOrderId}.");
-
-    public static Error spotOccupied(DateTimeOffset startAtUtc, DateTimeOffset endAtUtc) =>
-    Error.Conflict(
-           "ApplicationErrors.WorkOrder.SpotOccupied",
-           $"The WorkOrder time ({startAtUtc} ? {endAtUtc}) is already occupied by another WorkOrder.");
-
-    public static Error CustomerHasAssociatedWorkOrders =>
-    Error.Conflict(
-         code:"ApplicationErrors.Customer.HasAssociatedWorkOrders",
-          message: "Customer has associated work orders and cannot be deleted.");       
-
     public static Error WorkOrderNotFound => Error.NotFound(
            "ApplicationErrors.WorkOrder.NotFound",
            "WorkOrder does not exist.");
+
+  public static Error CustomerHasAssociatedWorkOrders => Error.Conflict(
+           "ApplicationErrors.Customer.HasAssociatedWorkOrders",
+           "Customer has associated WorkOrders and cannot be deleted.");
 
     public static Error LaborOccupied =>
     Error.Conflict(
@@ -76,7 +63,6 @@ namespace MechanicShop.Application.Common.ApplicationErrors
     public static readonly Error UserIdClaimInvalid = Error.Conflict(
         code: "Auth.UserIdClaim.Invalid",
         message: "Invalid userId claim.");
-
     public static readonly Error RefreshTokenExpired = Error.Conflict(
         code: "Auth.RefreshToken.Expired",
         message: "Refresh token is invalid or has expired.");
@@ -84,12 +70,10 @@ namespace MechanicShop.Application.Common.ApplicationErrors
     public static readonly Error UserNotFound = Error.NotFound(
         code: "Auth.User.NotFound",
         message: "User not found.");
-
     public static readonly Error TokenGenerationFailed = Error.Failure(
         code: "Auth.TokenGeneration.Failed",
         message: "Failed to generate new JWT token.");
 
     public static Error LaborNotFound =>
         Error.NotFound("Employee.LaborNotFound", "Labor does not exist.");
-}
 }

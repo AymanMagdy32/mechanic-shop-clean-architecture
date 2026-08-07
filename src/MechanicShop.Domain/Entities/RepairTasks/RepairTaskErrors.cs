@@ -4,6 +4,13 @@ namespace MechanicShop.Domain.Entities.RepairTasks;
 
 public static class RepairTaskErrors
 {
+
+    public static Error InvalidRepairTaskId =>
+        Error.Validation("RepairTask.Id.Invalid", "Invalid repair task ID.");
+        public static Error notFound =>
+        Error.NotFound("RepairTask.NotFound", "Repair task not found.");
+    public static Error NameAlreadyExists =>
+        Error.Conflict("RepairTask.Name.AlreadyExists", "A repair task with the same name already exists.");
     public static Error NameRequired =>
         Error.Validation("RepairTask.Name.Required", "Name is required.");
 

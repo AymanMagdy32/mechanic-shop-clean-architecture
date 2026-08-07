@@ -1,6 +1,14 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using QuestPDF.Infrastructure;
 
-app.MapGet("/", () => "Hello World!");
+
+var builder = WebApplication.CreateBuilder(args);
+
+
+QuestPDF.Settings.License = LicenseType.Community;
+
+
+
+
+var app = builder.Build();
 
 app.Run();
