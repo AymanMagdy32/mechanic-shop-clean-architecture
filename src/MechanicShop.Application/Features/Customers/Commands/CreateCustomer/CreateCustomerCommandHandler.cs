@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 namespace MechanicShop.Application.Features.Customers.Commands.CreateCustomer
 {
 
-    public sealed record CreateCustomerCommandHaandler(IAppDbContext Context, HybridCache Cache, Logger<CreateCustomerCommandHaandler> logger) : IRequestHandler<CreateCustomerCommand, Result<CustomerDto>>
+    public sealed record CreateCustomerCommandHaandler(IAppDbContext Context, HybridCache Cache, ILogger<CreateCustomerCommandHaandler> logger) : IRequestHandler<CreateCustomerCommand, Result<CustomerDto>>
     {
         public async Task<Result<CustomerDto>> Handle(CreateCustomerCommand request, CancellationToken ct)
         {

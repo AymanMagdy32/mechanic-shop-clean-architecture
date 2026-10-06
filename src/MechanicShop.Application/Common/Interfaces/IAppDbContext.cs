@@ -5,6 +5,7 @@ using MechanicShop.Domain.Entities.RepairTasks;
 using MechanicShop.Domain.Entities.RepairTasks.Parts;
 using MechanicShop.Domain.Entities.WorkOrders;
 using MechanicShop.Domain.Entities.WorkOrders.Billing;
+using MechanicShop.Domain.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace MechanicShop.Application.Common.Interfaces
@@ -18,6 +19,7 @@ namespace MechanicShop.Application.Common.Interfaces
     public DbSet<WorkOrder> WorkOrders { get; }
     public DbSet<Employee> Employees { get; }
     public DbSet<Invoice> Invoices { get; }
+    public DbSet<RefreshToken> RefreshTokens { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

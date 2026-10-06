@@ -1,6 +1,6 @@
 using MechanicShop.Application.Common.Interfaces;
 using MechanicShop.Application.Features.Customers.Dtos;
-using MechanicShop.Application.Features.Customers.GetCustomers;
+using MechanicShop.Application.Features.Customers.Queries.GetCustomers;
 using MechanicShop.Domain.Common.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

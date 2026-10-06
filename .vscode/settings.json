@@ -1,0 +1,21 @@
+{
+    "sqltools.connections": [
+        {
+            "connectionTimeout": 15,
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true,
+                "trustServerCertificate": false
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost,1433",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "Mechanic local",
+            "username": "sa",
+            "password": " Mechanic123!"
+        }
+    ]
+}

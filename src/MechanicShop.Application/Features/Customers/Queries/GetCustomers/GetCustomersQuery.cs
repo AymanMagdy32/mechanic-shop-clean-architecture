@@ -3,7 +3,7 @@ using MechanicShop.Application.Features.Customers.Dtos;
 using MechanicShop.Domain.Common.Results;
 using MechanicShop.Domain.Entities.Customers;
 
-namespace MechanicShop.Application.Features.Customers.GetCustomers
+namespace MechanicShop.Application.Features.Customers.Queries.GetCustomers
 {
 
     public sealed record GetCustomersQuery() : ICachedQuery<Result<List<CustomerDto>>>
